@@ -1,0 +1,32 @@
+.detailsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.detailsContainer li {
+  margin: 1rem;
+  flex: 1 1 calc(33.333% - 2rem);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.detailsContainer img {
+  border-radius: 10px;
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .detailsContainer li {
+    flex: 1 1 calc(50% - 2rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .detailsContainer li {
+    flex: 1 1 100%;
+  }
+}

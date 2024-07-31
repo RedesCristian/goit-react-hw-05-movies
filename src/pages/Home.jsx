@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { getPopularMovies } from '../api/api';
+import { NavLink } from 'react-router-dom';
+import CircularProgress from '@mui/material/CircularProgress';
 import styles from './Home.module.css';
-import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -24,7 +25,11 @@ const Home = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <CircularProgress />
+      </div>
+    );
   }
 
   if (error) {
@@ -34,16 +39,18 @@ const Home = () => {
   }
 
   return (
-    <div className="{styles.homeContainer}">
+    <div className={styles.homeContainer}>
       <h1>Trending today</h1>
-      <ul>
-        {movies.map(movie => (
-          <li key={movie.id}>
-            <Link to="{`/movies/{movieId}`}">
-              {movie.title} -{movie.release_date}
-            </Link>
-          </li>
-        ))}
+      <ul className={styles.homeText}>
+        {movies &&
+          movies.length > 0 &&
+          movies.map(movie => (
+            <li key={movie.id}>
+              <NavLink to={`/movies/${movie.id}`}>
+                {movie.title} - {new Date(movie.release_date).getFullYear()}
+              </NavLink>
+            </li>
+          ))}
       </ul>
     </div>
   );
